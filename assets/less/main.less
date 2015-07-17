@@ -1,0 +1,310 @@
+// out: ../css/main.css, compress: false, strictMath: true
+@import url(http://fonts.googleapis.com/css?family=Roboto:100,300,400,700);
+span {
+-webkit-line-break: none;
+}
+body {
+	font-family: 'Roboto', sans-serif;
+	overflow-x: hidden;
+	font-size: 16px;
+}
+h1, h2, h3 {
+	margin: 8px 0;
+	padding: 2px 0;
+	font-weight: bold;
+}
+:focus {
+outline: -webkit-focus-ring-color auto 0px;
+}
+.respCol {
+	padding:75px 40px;
+}
+.respRow {
+	width: 100%;
+	max-width: 960px;
+	margin: 0 auto;
+}
+.spacer-20 {
+	height: 20px;
+}
+.center {
+	text-align: center;
+}
+.breaker {
+	height: 4px;
+	background-color: @primary-700;
+	max-width: 80px;
+	margin: 0 auto;
+	margin-top: 20px;
+    margin-bottom: 20px;
+	&.white {
+		background-color: white;
+	}
+}
+@primary-100: #C8E6C9;
+@primary-500: #4CAF50;
+@primary-700: #ff5353;//#388E3C;
+@secondary-100: #FFE0B2;
+@secondary-200: #FFCC80;
+@secondary-400: #FFA726;
+.hero {
+	background-image: url(../img/heroImage2.png);
+	background-repeat: no-repeat;
+	background-size: cover;
+    background-position: center center;
+	background-attachment: fixed;
+	.overLay {
+		background-color: rgba(0,0,0,0.7);
+		margin: 0;
+	}
+	.respCol {
+		padding: 100px 0;
+		color: white;
+		text-align: center;
+		h1 {
+			font-size: 4em;
+		}
+		h2 {
+			font-size: 2em;
+			font-weight: 100;
+		}
+		.tagLine {
+			font-weight: 100;
+			font-size: 20px;
+		}
+		.btn-primary {
+			background-color: transparent;
+			border:1px solid white;
+			transition: 0.3s all;
+			width: 180px;
+			border-radius: 0;
+		}
+		.btn-primary:hover {
+			background-color: @primary-700;
+			transition: 0.3s all;
+		}
+	}
+}
+.intro {
+    .respCol {
+        padding-bottom: 10px;
+    }
+}
+.usp {
+    .respCol {
+        padding-top: 10px;
+    }
+    .title {
+        margin-left: 110px;
+		font-weight: bold;
+		margin-bottom: 20px;
+    }
+    .uspList {
+        .item{
+            list-style: none;
+            .icon {
+                width: 50px;
+                height: 40px;
+                display:inline-block;
+				&:hover {
+					transform: rotate(-30deg);
+					-webkit-transform: rotate(-30deg);
+					-moz-transform: rotate(-30deg);
+					transition: transform 0.3s;
+				}
+            }
+        }
+    }
+    span.fa {
+        font-size: 28px;
+        color: @primary-700;
+        text-align: center;
+    }
+    span.text {
+        padding-left: 15px;
+    }
+}
+.switcher {
+	position: absolute;
+	.wrapper {
+		width: 50px;
+		height: 50px;
+		background-color: @primary-700;
+		display: block;
+		.icon {
+			color: white;
+			font-size: 24px;
+			display: block;
+			text-align: center;
+            padding-top:6px;
+		}
+	}
+}
+.rightWrapper {
+	position: absolute;
+	top:0;
+	right:0;
+	width: 600px;
+	-webkit-transform: translate3d(550px, 0, 0);
+	transform: translate3d(550px, 0, 0);
+	transition: transform 0.5s ;
+	&.hovered {
+        -webkit-transform: translate3d(-50px, 0, 0);
+        transform: translate3d(-50px, 0, 0);
+		transition: transform 0.5s ;
+	}
+}
+.right {
+	width: 600px;
+	position: absolute;
+	left: 50px;
+	background-color: #1d2b2a;
+	padding: 0;
+	box-sizing: border-box;
+}
+.line {
+	height:100%;
+	background-image: url(../img/stripe.png);
+	background-repeat: repeat-x, repeat;
+	background-position: 0 0%;
+	background-attachment: fixed;
+	color: #d4f8e3;
+	text-shadow: -2px 0 0px rgba(0, 0, 225, 0.4), -1px 0 3px rgba(103, 171, 236, 0.6), 1px 0 4px rgba(69, 112, 204, 0.5);
+	-moz-animation: blinkBG 0.1s steps(2, start) infinite, skip 7s linear infinite, flicker 0.1s steps(2, start) infinite;
+	-webkit-animation: blinkBG 0.1s steps(2, start) infinite, skip 7s linear infinite, flicker 0.1s steps(2, start) infinite;
+	animation: blinkBG 0.1s steps(2, start) infinite, skip 7s linear infinite, flicker 0.1s steps(2, start) infinite;
+}
+.noise {
+	height:100%;
+	min-height: 100vh;
+	background-image: url(../img/noise.png), url(../img/scanlines.gif);
+	background-repeat: repeat;
+	opacity: 0.9;
+}
+.codeWrapper {
+	padding: 20px;
+}
+.typed {
+	font-family: Consolas, Inconsolata, Monaco, monospace;
+}
+
+.typed-cursor{
+    opacity: 1;
+    -webkit-animation: blink 0.7s infinite;
+    -moz-animation: blink 0.7s infinite;
+    animation: blink 0.7s infinite;
+}
+@keyframes blink{
+    0% { opacity:1; }
+    50% { opacity:0; }
+    100% { opacity:1; }
+}
+@-webkit-keyframes blink{
+    0% { opacity:1; }
+    50% { opacity:0; }
+    100% { opacity:1; }
+}
+@-moz-keyframes blink{
+    0% { opacity:1; }
+    50% { opacity:0; }
+    100% { opacity:1; }
+}
+
+@-moz-keyframes blink {
+  to {
+    background-color: #223332;
+  }
+}
+@-webkit-keyframes blinkBG {
+  to {
+    background-color: #223332;
+  }
+}
+@keyframes blinkBG {
+  to {
+    background-color: #223332;
+  }
+}
+@-moz-keyframes blinkBG {
+  to {
+    background-position: 0 100%;
+  }
+}
+@-webkit-keyframes skip {
+  to {
+    background-position: 0 100%;
+  }
+}
+@keyframes skip {
+  to {
+    background-position: 0 100%;
+  }
+}
+
+@-webkit-keyframes skipRandom {
+  to {
+    background-position: 0 95%;
+  }
+}
+@keyframes skipRandom {
+  to {
+    background-position: 0 95%;
+  }
+}
+
+
+@-moz-keyframes flicker {
+  to {
+    color: #bddeca;
+  }
+}
+@-webkit-keyframes flicker {
+  to {
+    color: #bddeca;
+  }
+}
+@keyframes flicker {
+  to {
+    color: #bddeca;
+  }
+}
+@-moz-keyframes ready {
+  to {
+    visibility: hidden;
+  }
+}
+@-webkit-keyframes ready {
+  to {
+    visibility: hidden;
+  }
+}
+@keyframes ready {
+  to {
+    visibility: hidden;
+  }
+}
+
+/* Large desktops and laptops */
+@media (min-width: 1200px) {
+
+}
+
+/* Landscape tablets and medium desktops */
+@media (min-width: 992px) and (max-width: 1199px) {
+
+}
+
+/* Portrait tablets and small desktops */
+@media (min-width: 768px) and (max-width: 991px) {
+
+}
+
+/* Landscape phones and portrait tablets */
+@media (max-width: 767px) {
+
+}
+
+/* Portrait phones and smaller */
+@media (max-width: 480px) {
+
+}
