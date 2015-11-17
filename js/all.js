@@ -1,0 +1,2 @@
+/*MAIN CONTROLLER*/
+$(function() {});
