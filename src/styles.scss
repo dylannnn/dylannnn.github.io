@@ -1,0 +1,39 @@
+/* You can add global styles to this file, and also import other style files */
+
+@import "assets/scss/variables";
+@import "~bootstrap/scss/bootstrap";
+@mixin cTransitions($elm: all, $duration: 0.4s, $animation: ease-in-out) {
+    moz-transition: $elm $duration $animation;
+    -o-transition: $elm $duration $animation;
+    -webkit-transition: $elm $duration $animation;
+    transition: $elm $duration $animation;
+}
+
+// Global
+body {
+    background-color: $blue;
+}
+
+[class*="container"] {
+    background-color: white;
+}
+
+.noselect {
+    -webkit-touch-callout: none; /* iOS Safari */
+    -webkit-user-select: none; /* Safari */
+    -khtml-user-select: none; /* Konqueror HTML */
+    -moz-user-select: none; /* Firefox */
+    -ms-user-select: none; /* Internet Explorer/Edge */
+    user-select: none; /* Non-prefixed version, currently supported by Chrome and Opera */
+}
+
+.btn {
+    &-rounded {
+        border-radius: 1.375em;
+        border-width: 2px;
+    }
+    &-ripple {
+        position: relative;
+        box-shadow: 0 4px 60px 0 rgba($blue, 0.66);
+    }
+}
