@@ -1,0 +1,27 @@
+[debug] [2018-09-07T10:55:36.683Z] ----------------------------------------------------------------------
+[debug] [2018-09-07T10:55:36.687Z] Command:       /usr/local/bin/node /usr/local/bin/firebase deploy
+[debug] [2018-09-07T10:55:36.687Z] CLI Version:   4.0.3
+[debug] [2018-09-07T10:55:36.687Z] Platform:      darwin
+[debug] [2018-09-07T10:55:36.687Z] Node Version:  v8.11.3
+[debug] [2018-09-07T10:55:36.689Z] Time:          Fri Sep 07 2018 12:55:36 GMT+0200 (CEST)
+[debug] [2018-09-07T10:55:36.689Z] ----------------------------------------------------------------------
+[debug] 
+[debug] [2018-09-07T10:55:36.703Z] > command requires scopes: ["email","openid","https://www.googleapis.com/auth/cloudplatformprojects.readonly","https://www.googleapis.com/auth/firebase","https://www.googleapis.com/auth/cloud-platform"]
+[debug] [2018-09-07T10:55:36.703Z] > authorizing via signed-in user
+[debug] [2018-09-07T10:55:36.706Z] > refreshing access token with scopes: ["email","https://www.googleapis.com/auth/cloud-platform","https://www.googleapis.com/auth/cloudplatformprojects.readonly","https://www.googleapis.com/auth/firebase","openid"]
+[debug] [2018-09-07T10:55:36.706Z] >>> HTTP REQUEST POST https://www.googleapis.com/oauth2/v3/token  
+ { refresh_token: '1/RLFkTGlc3mMwqhxzNraHwaGXYP3LrLEjVsZmLw_7S00',
+  client_id: '563584335869-fgrhgmd47bqnekij5i8b5pr03ho849e6.apps.googleusercontent.com',
+  client_secret: 'j9iVZfS8kkCEFUPaAeJV0sAi',
+  grant_type: 'refresh_token',
+  scope: 'email https://www.googleapis.com/auth/cloud-platform https://www.googleapis.com/auth/cloudplatformprojects.readonly https://www.googleapis.com/auth/firebase openid' } 
+ Fri Sep 07 2018 12:55:36 GMT+0200 (CEST)
+[debug] [2018-09-07T10:55:36.950Z] <<< HTTP RESPONSE 200
+[debug] [2018-09-07T10:55:36.958Z] >>> HTTP REQUEST GET https://admin.firebase.com/v1/projects/portfolio-3db7c  
+  
+ Fri Sep 07 2018 12:55:36 GMT+0200 (CEST)
+[debug] [2018-09-07T10:55:37.798Z] <<< HTTP RESPONSE 200
+[debug] [2018-09-07T10:55:37.800Z] >>> HTTP REQUEST GET https://admin.firebase.com/v1/database/portfolio-3db7c/tokens  
+  
+ Fri Sep 07 2018 12:55:37 GMT+0200 (CEST)
+[debug] [2018-09-07T10:55:38.593Z] <<< HTTP RESPONSE 200
