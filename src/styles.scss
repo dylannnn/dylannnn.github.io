@@ -1,39 +1,46 @@
 /* You can add global styles to this file, and also import other style files */
+@import "styles/variables";
 
-@import "assets/scss/variables";
-@import "~bootstrap/scss/bootstrap";
-@mixin cTransitions($elm: all, $duration: 0.4s, $animation: ease-in-out) {
-    moz-transition: $elm $duration $animation;
-    -o-transition: $elm $duration $animation;
-    -webkit-transition: $elm $duration $animation;
-    transition: $elm $duration $animation;
-}
+/* Importing Bootstrap SCSS file. */
 
-// Global
-body {
-    background-color: $blue;
-}
+@import "~bootstrap/scss/functions";
+@import "~bootstrap/scss/variables";
+@import "~bootstrap/scss/mixins";
+@import "~bootstrap/scss/root";
 
-[class*="container"] {
-    background-color: white;
-}
+@import "~bootstrap/scss/reboot";
+@import "~bootstrap/scss/type";
+// @import "~bootstrap/scss/images";
+// @import "~bootstrap/scss/code";
+@import "~bootstrap/scss/grid";
+// @import "~bootstrap/scss/tables";
+@import "~bootstrap/scss/forms";
+@import "~bootstrap/scss/buttons";
+@import "~bootstrap/scss/transitions";
+// @import "~bootstrap/scss/dropdown";
+// @import "~bootstrap/scss/button-group";
+@import "~bootstrap/scss/input-group";
+@import "~bootstrap/scss/custom-forms";
+// @import "~bootstrap/scss/nav";
+// @import "~bootstrap/scss/navbar";
+// @import "~bootstrap/scss/card";
+// @import "~bootstrap/scss/breadcrumb";
+// @import "~bootstrap/scss/pagination";
+// @import "~bootstrap/scss/badge";
+// @import "~bootstrap/scss/jumbotron";
+// @import "~bootstrap/scss/alert";
+// @import "~bootstrap/scss/progress";
+// @import "~bootstrap/scss/media";
+// @import "~bootstrap/scss/list-group";
+@import "~bootstrap/scss/close";
+// @import "~bootstrap/scss/toasts";
+@import "~bootstrap/scss/modal";
+// @import "~bootstrap/scss/tooltip";
+// @import "~bootstrap/scss/popover";
+// @import "~bootstrap/scss/carousel";
+// @import "~bootstrap/scss/spinners";
+@import "~bootstrap/scss/utilities";
+@import "~bootstrap/scss/print";
 
-.noselect {
-    -webkit-touch-callout: none; /* iOS Safari */
-    -webkit-user-select: none; /* Safari */
-    -khtml-user-select: none; /* Konqueror HTML */
-    -moz-user-select: none; /* Firefox */
-    -ms-user-select: none; /* Internet Explorer/Edge */
-    user-select: none; /* Non-prefixed version, currently supported by Chrome and Opera */
-}
 
-.btn {
-    &-rounded {
-        border-radius: 1.375em;
-        border-width: 2px;
-    }
-    &-ripple {
-        position: relative;
-        box-shadow: 0 4px 60px 0 rgba($blue, 0.66);
-    }
-}
+@import "styles/global";
