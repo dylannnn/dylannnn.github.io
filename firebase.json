@@ -1,24 +1,30 @@
 {
   "hosting": {
-    "public": "dist",
+    "public": "dist/portfolio",
     "ignore": [
       "firebase.json",
       "**/.*",
       "**/node_modules/**"
     ],
-    "headers": [{
-      "source" : "**/*.@(eot|otf|ttf|ttc|woff|font.css)",
-      "headers" : [{
-        "key" : "Access-Control-Allow-Origin",
-        "value" : "*"
-      }]
+    "rewrites": [
+      {
+        "source": "**",
+        "destination": "/index.html"
+      }
+    ],
+    "headers": [ {
+      "source": "**/*.@(eot|otf|ttf|ttc|woff|font.css)",
+      "headers": [ {
+        "key": "Access-Control-Allow-Origin",
+        "value": "*"
+      } ]
     }, {
-      "source" : "**/*.@(jpg|jpeg|gif|png|css|js)",
-      "headers" : [{
-        "key" : "Cache-Control",
-        "value" : "max-age=30672000"
-      }]
-    }]
+      "source": "**/*.@(jpg|jpeg|gif|png|js)",
+      "headers": [ {
+        "key": "Cache-Control",
+        "value": "max-age=31536000"
+      } ]
+    } ]
   },
   "functions": {
     "predeploy": [

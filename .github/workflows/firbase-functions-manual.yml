@@ -1,0 +1,25 @@
+#PRODUCTION Deploy functions to production manually
+name: Prod - Deploy to Firebase Functions manually
+on:
+  workflow_dispatch:
+    inputs:
+      name:
+        description: 'Are you sure to deploy?'
+        default: 'Yes'
+        required: true
+
+jobs:
+  build_and_deploy:
+    runs-on: ubuntu-latest
+    steps:
+      - name: Checkout Repo
+        uses: actions/checkout@v2
+      - name: Install Dependencies
+        run: cd functions && npm ci
+      - name: Deploy to Firebase Functions
+        uses: w9jds/firebase-action@master
+        with:
+          args: deploy --project prod --only functions
+        env:
+          FIREBASE_TOKEN: ${{ secrets.FIREBASE_TOKEN }}
+          GCP_SA_KEY: ${{ secrets.GCP_SA_KEY }}
