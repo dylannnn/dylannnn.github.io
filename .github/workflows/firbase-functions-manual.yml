@@ -19,7 +19,7 @@ jobs:
       - name: Deploy to Firebase Functions
         uses: w9jds/firebase-action@master
         with:
-          args: deploy --project prod --only functions
+          args: deploy --project portfolio-3db7c --only functions
         env:
           FIREBASE_TOKEN: ${{ secrets.FIREBASE_TOKEN }}
           GCP_SA_KEY: ${{ secrets.GCP_SA_KEY }}
