@@ -9,7 +9,7 @@ import { ContactForm } from 'src/app/core/models/contact-form.interface';
   styleUrls: ['./home.component.scss']
 })
 export class HomeComponent {
-  allowDownload = false;
+  allowDownload = true;
   constructor(private modalService: NgbModal) { }
 
   contactMe(): void {
