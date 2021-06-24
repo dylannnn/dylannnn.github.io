@@ -17,10 +17,10 @@
   </div>
 </ng-container>
 <ng-container *ngIf="!formSubmitted">
-  <form [formGroup]="contactMe" (ngSubmit)="submitForm()" [attr.id]="id">
+  <form [formGroup]="contactMe" (ngSubmit)="submitForm()" id="contact-me" aria-describedby="contact-help">
     <div class="modal-body">
       <div class="container">
-        <small id="contactHelp" class="d-block text-muted my-3">(I'll never share your contact info with anyone else.)</small>
+        <small id="contact-help" class="d-block text-muted my-3">(I'll never share your contact info with anyone else.)</small>
         <div class="form-row">
           <div class="form-group col-md-6">
             <label for="contactName">Name

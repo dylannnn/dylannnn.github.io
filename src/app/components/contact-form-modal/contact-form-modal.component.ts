@@ -1,4 +1,4 @@
-import { Component, Input } from '@angular/core';
+import { Component } from '@angular/core';
 import { AbstractControl, FormBuilder, FormGroup, Validators } from '@angular/forms';
 import { NgbActiveModal } from '@ng-bootstrap/ng-bootstrap';
 import { AngularFireFunctions } from '@angular/fire/functions';
@@ -12,7 +12,7 @@ export class ContactFormModalComponent {
   submitting = false;
   formSubmitted = false;
   contactMe: FormGroup;
-  @Input() id: string = '';
+
   constructor(
     public activeModal: NgbActiveModal,
     private formBuilder: FormBuilder,

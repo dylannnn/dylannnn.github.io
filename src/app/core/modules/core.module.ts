@@ -6,7 +6,9 @@ import { FontAwesomeModule, FaIconLibrary } from '@fortawesome/angular-fontaweso
 import { faSpinner, faCheckCircle } from '@fortawesome/free-solid-svg-icons';
 import { AngularFireModule } from '@angular/fire';
 import { AngularFireFunctionsModule } from '@angular/fire/functions';
+
 import { environment } from 'src/environments/environment';
+import { MetaService } from 'src/app/core/services/meta.service';
 import { NgBootstrapModule } from './ng-bootstrap.module';
 
 import { ContactFormModalComponent } from 'src/app/components/contact-form-modal/contact-form-modal.component';
@@ -14,6 +16,9 @@ import { ContactFormModalComponent } from 'src/app/components/contact-form-modal
 @NgModule({
   declarations: [
     ContactFormModalComponent
+  ],
+  providers: [
+    MetaService
   ],
   imports: [
     CommonModule,
