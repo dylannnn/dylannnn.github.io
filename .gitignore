@@ -44,3 +44,7 @@ testem.log
 .DS_Store
 Thumbs.db
 old
+
+# firebase local emulator
+functions/.runtimeconfig.json
+functions/*.log
