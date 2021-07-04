@@ -9,7 +9,11 @@
     "rewrites": [
       {
         "source": "**",
-        "destination": "/index.html"
+        "destination": "/index.html",
+        "run": {
+          "serviceId": "portfolio-3db7c",
+          "region": "europe-west4"
+        }
       }
     ],
     "headers": [ {

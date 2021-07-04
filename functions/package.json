@@ -2,13 +2,15 @@
   "name": "functions",
   "scripts": {
     "lint": "eslint --ext .js,.ts .",
-    "build": "tsc",
+    "build": "npm run clean && tsc",
     "serve": "npm run build && firebase emulators:start --only functions",
     "shell": "npm run build && firebase functions:shell",
     "start": "npm run shell",
+    "clean": "rm -rf lib",
     "deploy": "firebase deploy --only functions",
     "logs": "firebase functions:log",
-    "environment-config": "firebase functions:config:set sendgrid.key=\"SAMPLE_KEY\""
+    "set-environment-config": "firebase functions:config:set sendgrid.key=\"SAMPLE_KEY\"",
+    "get-environment-config": "firebase functions:config:get > functions/.runtimeconfig.json"
   },
   "engines": {
     "node": "14"

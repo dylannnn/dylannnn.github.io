@@ -3,7 +3,7 @@
     <div class="row position-relative ">
       <div class="col">
         <ng-container *ngIf="allowDownload">
-          <a href="https://firebasestorage.googleapis.com/v0/b/portfolio-3db7c.appspot.com/o/CV%20-%202021.pdf?alt=media&token=a17f9877-7752-4e26-9032-641a940c6fef" title="Download CV" download target="_blank" class="btn btn-rounded btn-outline-primary btn-download-cv position-absolute">
+          <a id="cv-download" href="https://firebasestorage.googleapis.com/v0/b/portfolio-3db7c.appspot.com/o/CV_2021.pdf?alt=media&token=cc9c65a3-fcf2-4b5b-bc36-85e2ead7a376" title="Download CV" download target="_blank" class="btn btn-rounded btn-outline-primary btn-download-cv position-absolute">
             Resume
           </a>
         </ng-container>
@@ -109,7 +109,7 @@
           </div>
           <div class="banner-cta mt-5">
             <p class="text-capitalize text-gradient-primary font-weight-bold">Design, creative, technology</p>
-            <button class="btn btn-rounded btn-primary btn-ripple px-5 mt-3" (click)="contactMe()">
+            <button id="contact-me" class="btn btn-rounded btn-primary btn-ripple px-5 mt-3" (click)="contactMe()">
               <span>Contact me</span>
               <div class="rippleJS fill"></div>
             </button>
