@@ -8,6 +8,7 @@
     "build:stats": "ng build --stats-json",
     "watch": "ng build --watch --configuration development",
     "test": "ng test",
+    "test:prod": "ng test --browsers=ChromeHeadless --watch=false --code-coverage",
     "lint": "ng lint",
     "deploy": "ng deploy",
     "http-serve": "http-server -p 8080 -c-1 dist/portfolio",

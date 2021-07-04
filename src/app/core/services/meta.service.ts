@@ -1,7 +1,7 @@
 import { Injectable } from '@angular/core';
 import { Meta } from '@angular/platform-browser';
-import { openGraphData } from 'src/app/configurations/open-graph.data';
-import { twitterCardData } from 'src/app/configurations/twitter-card.data';
+import { openGraphData } from 'src/app/data/open-graph.data';
+import { twitterCardData } from 'src/app/data/twitter-card.data';
 
 @Injectable({
   providedIn: 'root'

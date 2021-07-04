@@ -1,7 +1,8 @@
 import { Component } from '@angular/core';
 import { AbstractControl, FormBuilder, FormGroup, Validators } from '@angular/forms';
 import { NgbActiveModal } from '@ng-bootstrap/ng-bootstrap';
-import { AngularFireFunctions } from '@angular/fire/functions';
+import { FirebaseFunctionsResponse } from 'shared/models/firebase-functions-response';
+import { FirebaseFunctionService } from 'src/app/core/services/firebase-function.service';
 
 @Component({
   selector: 'app-contact-form-modal',
@@ -9,6 +10,7 @@ import { AngularFireFunctions } from '@angular/fire/functions';
   styleUrls: ['./contact-form-modal.component.scss']
 })
 export class ContactFormModalComponent {
+  formResponse: FirebaseFunctionsResponse | null = null;
   submitting = false;
   formSubmitted = false;
   contactMe: FormGroup;
@@ -16,21 +18,21 @@ export class ContactFormModalComponent {
   constructor(
     public activeModal: NgbActiveModal,
     private formBuilder: FormBuilder,
-    private fns: AngularFireFunctions
+    private fns: FirebaseFunctionService
   ) {
     this.contactMe = this.formBuilder.group({
-      contactName: ['', Validators.required],
-      contactPhone: '',
-      contactEmail: ['', Validators.compose([
+      name: ['', Validators.required],
+      phone: '',
+      email: ['', Validators.compose([
         Validators.pattern('^[a-zA-Z0-9._%+-]+@[a-z0-9.-]+\.[a-z]{2,4}$'),
         Validators.required
       ])],
-      contactMessage: ''
+      message: ''
     });
   }
 
   get contactName(): AbstractControl | null {
-    return this.contactMe.get('contactName');
+    return this.contactMe.get('name');
   }
 
   get isContactNameInvalid(): boolean {
@@ -38,7 +40,7 @@ export class ContactFormModalComponent {
   }
 
   get contactEmail(): AbstractControl | null {
-    return this.contactMe.get('contactEmail');
+    return this.contactMe.get('email');
   }
 
   get isContactEmailInvalid(): boolean {
@@ -48,12 +50,12 @@ export class ContactFormModalComponent {
   submitForm(): void {
     this.submitting = true;
 
-    const sendEmail = this.fns.httpsCallable('sendEmail');
-
-    sendEmail(this.contactMe.value).subscribe(result => {
+    this.fns.sendEmail(this.contactMe.value).subscribe(result => {
       this.formSubmitted = true;
-    }, error => {
-      console.log('Submit with error :( ', error);
+      this.formResponse = result;
+    }, (error: FirebaseFunctionsResponse) => {
+      this.formSubmitted = true;
+      this.formResponse = error;
     });
   }
 }

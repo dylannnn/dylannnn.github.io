@@ -1,12 +1,15 @@
 import { ComponentFixture, TestBed } from '@angular/core/testing';
 import { AngularFireModule } from '@angular/fire';
-import { AngularFireFunctions } from '@angular/fire/functions';
-import { FormBuilder, FormGroup, ReactiveFormsModule } from '@angular/forms';
+import { AbstractControl, FormBuilder, FormGroup, ReactiveFormsModule } from '@angular/forms';
 import { By } from '@angular/platform-browser';
 import { FaIconLibrary, FontAwesomeModule } from '@fortawesome/angular-fontawesome';
-import { faCheckCircle, faSpinner } from '@fortawesome/free-solid-svg-icons';
+import { faCheckCircle, faSpinner, faTimes } from '@fortawesome/free-solid-svg-icons';
 import { NgbActiveModal } from '@ng-bootstrap/ng-bootstrap';
-import { of } from 'rxjs';
+import { Observable, of } from 'rxjs';
+import { ResponseConstents } from 'shared/constents/response-constents';
+import { FirebaseFunctionsResponse, RESPONSE_STATUS_CODE } from 'shared/models/firebase-functions-response';
+import { IContactForm } from 'src/app/core/models/contact-form.interface';
+import { FirebaseFunctionService } from 'src/app/core/services/firebase-function.service';
 
 import { ContactFormModalComponent } from './contact-form-modal.component';
 
@@ -15,9 +18,17 @@ describe('ContactFormModalComponent', () => {
   let fixture: ComponentFixture<ContactFormModalComponent>;
   let activeModal: NgbActiveModal;
   let contactForm: FormGroup;
-  let firebaseFunction: AngularFireFunctions;
-  let firebaseFunctionSpy: jasmine.Spy;
-  let faIconLibrary: FaIconLibrary
+  let contactName: AbstractControl | null;
+  let contactEmail: AbstractControl | null;
+  let contactPhone: AbstractControl | null;
+  let contactMessage: AbstractControl | null;
+  let firebaseFunctionService: FirebaseFunctionService;
+  let firebaseFunctionServiceSpy: jasmine.Spy;
+  let faIconLibrary: FaIconLibrary;
+  let mockFormData: IContactForm;
+
+  let responseSuccess: Observable<FirebaseFunctionsResponse>;
+  let responseFailed: Observable<FirebaseFunctionsResponse>;
 
   beforeEach(async () => {
     await TestBed.configureTestingModule({
@@ -30,24 +41,43 @@ describe('ContactFormModalComponent', () => {
       providers: [
         NgbActiveModal,
         FormBuilder,
-        AngularFireFunctions,
-        FaIconLibrary
+        FaIconLibrary,
+        FirebaseFunctionService
       ]
     })
     .compileComponents();
 
     activeModal = TestBed.inject(NgbActiveModal);
-    firebaseFunction = TestBed.inject(AngularFireFunctions);
+    firebaseFunctionService = TestBed.inject(FirebaseFunctionService);
     faIconLibrary = TestBed.inject(FaIconLibrary);
   });
 
   beforeEach(() => {
     fixture = TestBed.createComponent(ContactFormModalComponent);
     component = fixture.componentInstance;
+
     contactForm = component.contactMe;
+
+    contactName = contactForm.get('name');
+    contactEmail = contactForm.get('email');
+    contactPhone = contactForm.get('phone');
+    contactMessage = contactForm.get('message');
+
+    mockFormData = {
+      name: 'Unit',
+      phone: '123456789',
+      email: 'abc@unit-test.com',
+      message: 'Unit test'
+    }
+
+    responseSuccess = of(new FirebaseFunctionsResponse('Success', RESPONSE_STATUS_CODE.OK, 'Unit test success'));
+    responseFailed = of(new FirebaseFunctionsResponse('Failed', RESPONSE_STATUS_CODE.SERVICE_ERROR, 'Unit test failed'));
+
     faIconLibrary.addIcons(
       faSpinner,
-      faCheckCircle);
+      faCheckCircle,
+      faTimes
+    );
     fixture.detectChanges();
   });
 
@@ -59,70 +89,87 @@ describe('ContactFormModalComponent', () => {
     expect(contactForm).toBeTruthy();
 
     expect(component.contactName).toBeTruthy();
-    expect(contactForm.get('contactName')).toBe(component.contactName);
+    expect(contactName).toBe(component.contactName);
 
-    expect(contactForm.get('contactPhone')).toBeTruthy();
+    expect(contactPhone).toBeTruthy();
 
     expect(component.contactEmail).toBeTruthy();
-    expect(contactForm.get('contactEmail')).toBe(component.contactEmail);
+    expect(contactEmail).toBe(component.contactEmail);
 
-    expect(contactForm.get('contactMessage')).toBeTruthy();
+    expect(contactMessage).toBeTruthy();
   });
 
   it('should show contact name is required', () => {
-    contactForm.get('contactName')?.markAsDirty();
-    expect(contactForm.get('contactName')?.valid).toBeFalsy();
+    contactName?.markAsDirty();
+    expect(contactName?.valid).toBeFalsy();
     expect(component.isContactNameInvalid).toBeTruthy();
 
-    contactForm.get('contactName')?.setValue('Unit test');
-    expect(contactForm.get('contactName')?.valid).toBeTruthy();
+    contactName?.setValue(mockFormData.name);
+    expect(contactName?.valid).toBeTruthy();
     expect(component.isContactNameInvalid).toBeFalsy();
   });
 
   it('should show contact email is required and has proper email validation', () => {
-    contactForm.get('contactEmail')?.markAsDirty();
-    expect(contactForm.get('contactEmail')?.valid).toBeFalsy();
+    contactEmail?.markAsDirty();
+    expect(contactEmail?.valid).toBeFalsy();
     expect(component.isContactEmailInvalid).toBeTruthy();
 
-    contactForm.get('contactEmail')?.setValue('unit-test');
-    expect(contactForm.get('contactEmail')?.valid).toBeFalsy();
+    contactEmail?.setValue('unit-test');
+    expect(contactEmail?.valid).toBeFalsy();
     expect(component.isContactEmailInvalid).toBeTruthy();
 
-    contactForm.get('contactEmail')?.setValue('unit-test.com');
-    expect(contactForm.get('contactEmail')?.valid).toBeFalsy();
+    contactEmail?.setValue('unit-test.com');
+    expect(contactEmail?.valid).toBeFalsy();
     expect(component.isContactEmailInvalid).toBeTruthy();
 
-    contactForm.get('contactEmail')?.setValue('abc@unit-test.com');
-    expect(contactForm.get('contactEmail')?.valid).toBeTruthy();
+    contactEmail?.setValue(mockFormData.email);
+    expect(contactEmail?.valid).toBeTruthy();
     expect(component.isContactEmailInvalid).toBeFalsy();
   });
 
+  it('should submit form', () => {
+
+
+    const submitButton = fixture.debugElement.query(By.css('button[type="submit"]'));
+    expect(submitButton.nativeElement.disabled).toBeTrue();
+    component.contactName?.setValue(mockFormData.name);
+    component.contactEmail?.setValue(mockFormData.email);
+    contactPhone?.setValue(mockFormData.phone);
+    contactMessage?.setValue(mockFormData.message);
+    fixture.detectChanges();
+    expect(submitButton.nativeElement.disabled).toBeFalse();
+
+    firebaseFunctionServiceSpy = spyOn(firebaseFunctionService, 'sendEmail').and.callThrough().and.returnValue(of(new FirebaseFunctionsResponse('Success', RESPONSE_STATUS_CODE.OK, 'Unit test success')));
+    component.submitForm();
+    fixture.detectChanges();
+
+    expect(firebaseFunctionService.sendEmail).toHaveBeenCalledOnceWith(mockFormData);
+  });
+
   it('should call firebase function - sendEmail with success', () => {
-    firebaseFunctionSpy = spyOn(firebaseFunction, 'httpsCallable').and.callThrough().and.returnValue(() => of({
-      message: 'success',
-      status: 200,
-      feel: 'Happy',
-    }));
-    firebaseFunction.httpsCallable('sendEmail');
-    expect(firebaseFunction.httpsCallable).toHaveBeenCalledOnceWith('sendEmail');
+    firebaseFunctionServiceSpy = spyOn(firebaseFunctionService, 'sendEmail').and.callThrough().and.returnValue(responseSuccess);
+    firebaseFunctionService.sendEmail(mockFormData);
+    expect(firebaseFunctionService.sendEmail).toHaveBeenCalledOnceWith(mockFormData);
   });
 
   it('should call firebase function - sendEmail with failer', () => {
-    const throwMeAnError = function() {
-      throw new Error('Send email Failed');
-    };
-    firebaseFunctionSpy = spyOn(firebaseFunction, 'httpsCallable').and.callFake(() => throwMeAnError);
-
-    expect(firebaseFunction.httpsCallable('sendEmail')).toThrowError('Send email Failed');
-    expect(firebaseFunction.httpsCallable).toHaveBeenCalledWith('sendEmail');
+    firebaseFunctionServiceSpy = spyOn(firebaseFunctionService, 'sendEmail').and.returnValues(responseFailed);
+    const formResponse = firebaseFunctionService.sendEmail(mockFormData);
+    expect(firebaseFunctionService.sendEmail).toHaveBeenCalledWith(mockFormData);
+    expect(formResponse).toEqual(responseFailed);
   });
 
   it('should show success message', () => {
     component.formSubmitted = true;
+    component.formResponse = new FirebaseFunctionsResponse(
+      ResponseConstents.MESSAGE_SUCCESS,
+      RESPONSE_STATUS_CODE.OK,
+      ResponseConstents.DETAILES_SUCCESS
+    );
     fixture.detectChanges();
     const successMessage = fixture.debugElement.query(By.css('.modal-body'));
     const successMessageElm = successMessage.nativeElement as HTMLElement;
-    expect(successMessageElm.textContent).toContain('Thank you for your message. I will get back to you ASAP.')
+    expect(successMessageElm.textContent).toContain(ResponseConstents.DETAILES_SUCCESS);
   });
 });
 
