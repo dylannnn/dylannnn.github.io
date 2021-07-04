@@ -28,3 +28,10 @@ export enum RESPONSE_STATUS_CODE {
   SERVICE_ERROR = 500,
   NOT_FOUND = 404
 }
+
+export interface IContactForm {
+  name: string;
+  phone?: string;
+  email: string;
+  message?: string;
+}

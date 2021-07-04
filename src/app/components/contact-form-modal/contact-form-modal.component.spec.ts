@@ -6,8 +6,8 @@ import { FaIconLibrary, FontAwesomeModule } from '@fortawesome/angular-fontaweso
 import { faCheckCircle, faSpinner, faTimes } from '@fortawesome/free-solid-svg-icons';
 import { NgbActiveModal } from '@ng-bootstrap/ng-bootstrap';
 import { Observable, of } from 'rxjs';
-import { ResponseConstents } from 'shared/constents/response-constents';
-import { FirebaseFunctionsResponse, RESPONSE_STATUS_CODE } from 'shared/models/firebase-functions-response';
+import { ResponseConstents } from 'functions/src/response-constents';
+import { FirebaseFunctionsResponse, RESPONSE_STATUS_CODE } from 'functions/src/firebase-functions-response';
 import { IContactForm } from 'src/app/core/models/contact-form.interface';
 import { FirebaseFunctionService } from 'src/app/core/services/firebase-function.service';
 

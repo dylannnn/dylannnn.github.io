@@ -1,7 +1,7 @@
 import { Component } from '@angular/core';
 import { AbstractControl, FormBuilder, FormGroup, Validators } from '@angular/forms';
 import { NgbActiveModal } from '@ng-bootstrap/ng-bootstrap';
-import { FirebaseFunctionsResponse } from 'shared/models/firebase-functions-response';
+import { FirebaseFunctionsResponse } from 'functions/src/firebase-functions-response';
 import { FirebaseFunctionService } from 'src/app/core/services/firebase-function.service';
 
 @Component({

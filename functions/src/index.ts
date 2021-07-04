@@ -10,11 +10,10 @@ import { MailDataRequired, MailService } from '@sendgrid/mail';
 import * as admin from 'firebase-admin';
 import {
   FirebaseFunctionsResponse,
+  IContactForm,
   RESPONSE_STATUS_CODE,
-} from '../../shared/models/firebase-functions-response';
-import { FirebaseRegion } from '../../shared/configurations/firebase-regions';
-import { ResponseConstents } from '../../shared/constents/response-constents';
-import { IContactForm } from '../../src/app/core/models/contact-form.interface';
+} from './firebase-functions-response';
+import { ResponseConstents } from './response-constents';
 
 const SENDGRID_API_KEY = functions.config().sendgrid.key;
 const sendMail = new MailService();
@@ -22,17 +21,19 @@ const sendMail = new MailService();
 admin.initializeApp();
 sendMail.setApiKey(SENDGRID_API_KEY);
 
-const service = functions.region(FirebaseRegion);
+const service = functions.region('europe-west3');
 
 exports.sendEmail = service.https
     .onCall(async (data: IContactForm, context) => {
-      console.log('functions - https - onCall, data: ', data);
       const mailData: MailDataRequired = {
         to: 'dylannnnlee@gmail.com',
-        from: `${data.email}`,
+        from: 'dylannnnlee@gmail.com',
         templateId: 'd-d72ecd2125354d15b5c5f12dc76e79b3',
         dynamicTemplateData: {
-          ...data,
+          name: data.name,
+          phone: data.phone,
+          email: data.email,
+          message: data.message,
         },
       };
 

@@ -14,7 +14,7 @@ import { NgBootstrapModule } from './ng-bootstrap.module';
 
 import { ContactFormModalComponent } from 'src/app/components/contact-form-modal/contact-form-modal.component';
 import { FirebaseFunctionAPIs } from 'src/app/core/services/firebase-functions-api.service';
-import { FirebaseRegion } from 'shared/configurations/firebase-regions';
+import { FirebaseRegion } from 'functions/src/firebase-regions';
 
 @NgModule({
   declarations: [

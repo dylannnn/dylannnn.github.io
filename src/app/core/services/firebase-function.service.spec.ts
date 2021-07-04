@@ -1,7 +1,7 @@
 import { TestBed } from '@angular/core/testing';
 import { AngularFireModule } from '@angular/fire';
 import { Observable, of } from 'rxjs';
-import { FirebaseFunctionsResponse, RESPONSE_STATUS_CODE } from 'shared/models/firebase-functions-response';
+import { FirebaseFunctionsResponse, RESPONSE_STATUS_CODE } from 'functions/src/firebase-functions-response';
 import { IContactForm } from 'src/app/core/models/contact-form.interface';
 
 import { FirebaseFunctionService } from './firebase-function.service';
