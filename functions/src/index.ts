@@ -15,25 +15,28 @@ import {
 } from './firebase-functions-response';
 import { ResponseConstents } from './response-constents';
 
-const SENDGRID_API_KEY = functions.config().sendgrid.key;
 const sendMail = new MailService();
 
 admin.initializeApp();
-sendMail.setApiKey(SENDGRID_API_KEY);
 
-const service = functions.region('europe-west3');
+const service = functions.runWith({
+  secrets: ['SENDGRID_API_KEY'],
+}).region('europe-west3');
+
+const SENDGRID_API_KEY = `${process.env.SENDGRID_API_KEY}`;
+sendMail.setApiKey(SENDGRID_API_KEY);
 
 exports.sendEmail = service.https
     .onCall(async (data: IContactForm, context) => {
       const mailData: MailDataRequired = {
         to: 'dylannnnlee@gmail.com',
-        from: 'dylannnnlee@gmail.com',
+        from: 'info@yunfei.li',
         templateId: 'd-d72ecd2125354d15b5c5f12dc76e79b3',
         dynamicTemplateData: {
-          name: data.name,
-          phone: data.phone,
-          email: data.email,
-          message: data.message,
+          name: data?.name,
+          phone: data?.phone,
+          email: data?.email,
+          message: data?.message,
         },
       };
 
@@ -45,7 +48,7 @@ exports.sendEmail = service.https
             RESPONSE_STATUS_CODE.OK,
             ResponseConstents.DETAILES_SUCCESS
         );
-      } catch (error) {
+      } catch (error: any) {
         console.log('Email has been send with error');
         console.error(error.toString());
         return new FirebaseFunctionsResponse(

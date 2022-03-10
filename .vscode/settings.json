@@ -1,0 +1,6 @@
+{
+  "workbench.fontAliasing": "antialiased",
+  "files.associations": {
+    "*.scss": "postcss"
+  },
+}

@@ -8,27 +8,31 @@
     "start": "npm run shell",
     "clean": "rm -rf lib",
     "deploy": "firebase deploy --only functions",
+    "predeploy": "npm --prefix functions run build",
     "logs": "firebase functions:log",
-    "set-environment-config": "firebase functions:config:set sendgrid.key=\"SAMPLE_KEY\"",
-    "get-environment-config": "firebase functions:config:get > functions/.runtimeconfig.json"
+    "firebase:set-secrets": "firebase functions:secrets:set SENDGRID_API_KEY",
+    "firebase:access-secrets": "firebase functions:secrets:access SENDGRID_API_KEY",
+    "firebase:get-secrets": "firebase functions:secrets:get SENDGRID_API_KEY",
+    "firebase:set-environment-config": "firebase functions:config:set sendgrid.key=\"SAMPLE_KEY\"",
+    "firebase:get-environment-config": "firebase functions:config:get > functions/.runtimeconfig.json"
   },
   "engines": {
-    "node": "14"
+    "node": "16"
   },
   "main": "lib/index.js",
   "dependencies": {
-    "@sendgrid/mail": "^7.4.5",
-    "firebase-admin": "^9.9.0",
-    "firebase-functions": "^3.14.1"
+    "@sendgrid/mail": "^7.6.1",
+    "firebase-admin": "^10.0.2",
+    "firebase-functions": "^3.18.1"
   },
   "devDependencies": {
-    "@typescript-eslint/eslint-plugin": "^4.28.0",
-    "@typescript-eslint/parser": "^4.28.0",
-    "eslint": "^7.29.0",
+    "@typescript-eslint/eslint-plugin": "^5.12.1",
+    "@typescript-eslint/parser": "^5.12.1",
+    "eslint": "^8.9.0",
     "eslint-config-google": "^0.14.0",
-    "eslint-plugin-import": "^2.23.4",
-    "firebase-functions-test": "^0.3.0",
-    "typescript": "^4.3.4"
+    "eslint-plugin-import": "^2.25.4",
+    "firebase-functions-test": "^0.3.3",
+    "typescript": "^4.5.5"
   },
   "private": true
 }
