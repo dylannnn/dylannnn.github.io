@@ -8,5 +8,6 @@ export const environment = {
     storageBucket: "portfolio-3db7c.appspot.com",
     messagingSenderId: "453960330766",
     appId: "1:453960330766:web:fa1d9506043df9abdb965f"
-  }
+  },
+  useEmulators: false
 };

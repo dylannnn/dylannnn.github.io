@@ -1,5 +1,9 @@
 {
   "$schema": "./node_modules/@angular/cli/lib/config/schema.json",
+  "cli": {
+    "analytics": false,
+    "defaultCollection": "@angular-eslint/schematics"
+  },
   "version": 1,
   "newProjectRoot": "projects",
   "projects": {
@@ -29,20 +33,20 @@
             "assets": [
               "src/favicon.ico",
               "src/assets",
-              "src/manifest.webmanifest",
               "src/apple-touch-icon.png",
               "src/favicon-16x16.png",
               "src/favicon-32x32.png",
               "src/safari-pinned-tab.svg",
               "src/robots.txt",
-              "src/sitemap.xml"
+              "src/sitemap.xml",
+              "src/manifest.webmanifest"
             ],
             "styles": [
-              "src/styles.scss"
+              "src/styles/tailwind.scss",
+              "src/styles/material.scss",
+              "src/styles/styles.scss"
             ],
-            "scripts": [
-              "node_modules/vanilla-ripplejs/ripple.min.js"
-            ],
+            "scripts": [],
             "serviceWorker": true,
             "ngswConfigPath": "ngsw-config.json"
           },
@@ -108,20 +112,20 @@
             "assets": [
               "src/favicon.ico",
               "src/assets",
-              "src/manifest.webmanifest",
               "src/apple-touch-icon.png",
               "src/favicon-16x16.png",
               "src/favicon-32x32.png",
               "src/safari-pinned-tab.svg",
               "src/robots.txt",
-              "src/sitemap.xml"
+              "src/sitemap.xml",
+              "src/manifest.webmanifest"
             ],
             "styles": [
-              "src/styles.scss"
+              "src/styles/tailwind.scss",
+              "src/styles/material.scss",
+              "src/styles/styles.scss"
             ],
-            "scripts": [
-              "node_modules/vanilla-ripplejs/ripple.min.js"
-            ]
+            "scripts": []
           }
         },
         "lint": {
@@ -135,13 +139,16 @@
         },
         "deploy": {
           "builder": "@angular/fire:deploy",
-          "options": {}
+          "options": {
+            "prerender": false,
+            "ssr": false,
+            "browserTarget": "portfolio:build:production",
+            "firebaseProject": "portfolio-3db7c",
+            "firebaseHostingSite": "portfolio-3db7c"
+          }
         }
       }
     }
   },
-  "defaultProject": "portfolio",
-  "cli": {
-    "defaultCollection": "@angular-eslint/schematics"
-  }
+  "defaultProject": "portfolio"
 }

@@ -1,0 +1,72 @@
+.h-full-offset {
+  height: calc(100vh - 30px);
+  min-height: 600px;
+}
+
+.banner {
+  height: calc(100vh - 2em);
+  min-height: 700px;
+  padding: 1em;
+  &-bg {
+    z-index: 0;
+    .bg-text {
+      font-size: 30vw;
+      line-height: 1;
+      font-weight: bold;
+      color: #f6f6f6;
+      pointer-events: none;
+    }
+  }
+  &-content,
+  &-cta {
+    z-index: 0;
+  }
+  &-content {
+    h1 {
+      font-weight: bold;
+      color: #3d2be8;
+    }
+    h2 {
+      font-weight: lighter;
+      color: #9b9b9b;
+    }
+  }
+}
+
+.sparks {
+  position: absolute;
+  z-index: -1;
+  &-plus {
+    &.orange {
+      top: 50px;
+      left: 20%;
+    }
+    &.pink {
+      bottom: 60px;
+      right: 35%;
+    }
+    &.light-blue {
+      top: 20px;
+      right: 20%;
+    }
+  }
+  &-circle {
+    &.light-blue {
+      top: 75px;
+      left: 33%;
+    }
+  }
+  &-square {
+    &.yellow {
+      left: 50%;
+      top: 20px;
+    }
+  }
+  &-triangle {
+    &.purple {
+      left: 45%;
+      top: 100px;
+      transform: scale(0.7, 0.7) rotate(20deg);
+    }
+  }
+}

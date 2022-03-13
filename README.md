@@ -1,28 +1,27 @@
-[![CodeQL](https://github.com/dylannnn/dylannnn.github.io/actions/workflows/codeql-analysis.yml/badge.svg)](https://github.com/dylannnn/dylannnn.github.io/actions/workflows/codeql-analysis.yml) [![Deploy to Firebase Hosting](https://github.com/dylannnn/dylannnn.github.io/actions/workflows/firebase-hosting-merge.yml/badge.svg)](https://github.com/dylannnn/dylannnn.github.io/actions/workflows/firebase-hosting-merge.yml) [![Deploy to Firebase Functions](https://github.com/dylannnn/dylannnn.github.io/actions/workflows/firbase-functions-manual.yml/badge.svg)](https://github.com/dylannnn/dylannnn.github.io/actions/workflows/firbase-functions-manual.yml)
 # Portfolio
 
-Personal Portfolio site
+This project was generated with [Angular CLI](https://github.com/angular/angular-cli) version 13.2.0.
 
-## Technical
-- Angular
-- Bootstrap
-- Firebase Hosting
-- Firebase Functions
-- EsLint
+## Development server
 
-# Develop
+Run `ng serve` for a dev server. Navigate to `http://localhost:4200/`. The app will automatically reload if you change any of the source files.
 
-Run `ng serve` for local development
+## Code scaffolding
 
-Run `ng lint` for linting the application
+Run `ng generate component component-name` to generate a new component. You can also use `ng generate directive|pipe|service|class|guard|interface|enum|module`.
 
-[TBC] Run `ng test` to run the unit test
+## Build
 
-[TBC] Run `ng e2e` for the End to End test
+Run `ng build` to build the project. The build artifacts will be stored in the `dist/` directory.
 
-# Deploy
+## Running unit tests
 
-Github actions has been configured for CI/CD
-## Deploy application to Firebase Hosting
+Run `ng test` to execute the unit tests via [Karma](https://karma-runner.github.io).
 
-## Deploy functions to Firebase Functions
+## Running end-to-end tests
+
+Run `ng e2e` to execute the end-to-end tests via a platform of your choice. To use this command, you need to first add a package that implements end-to-end testing capabilities.
+
+## Further help
+
+To get more help on the Angular CLI use `ng help` or go check out the [Angular CLI Overview and Command Reference](https://angular.io/cli) page.
