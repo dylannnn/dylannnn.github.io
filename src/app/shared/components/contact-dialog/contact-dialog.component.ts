@@ -1,6 +1,6 @@
-import { Component, OnInit } from '@angular/core';
+import { Component, OnDestroy } from '@angular/core';
 import { AbstractControl, FormBuilder, FormGroup, Validators } from '@angular/forms';
-import { EMPTY, Observable, Subject, takeUntil } from 'rxjs';
+import { Subject, takeUntil } from 'rxjs';
 import { FirebaseFunctionsResponse } from 'functions/src/firebase-functions-response';
 import { FunctionsService } from 'src/app/shared/services/functions/functions.service';
 
@@ -9,7 +9,7 @@ import { FunctionsService } from 'src/app/shared/services/functions/functions.se
   templateUrl: './contact-dialog.component.html',
   styleUrls: ['./contact-dialog.component.scss']
 })
-export class ContactDialogComponent implements OnInit {
+export class ContactDialogComponent implements OnDestroy {
   contactMe: FormGroup;
   sending: boolean = false;
   formResponse!: FirebaseFunctionsResponse;
@@ -32,7 +32,9 @@ export class ContactDialogComponent implements OnInit {
     });
   }
 
-  ngOnInit(): void {
+  ngOnDestroy(): void {
+      this._unsubscribeAll.next(null);
+      this._unsubscribeAll.complete();
   }
 
   get contactName(): AbstractControl | null {
@@ -72,12 +74,5 @@ export class ContactDialogComponent implements OnInit {
         this.sending = false;
       }
     });
-    // this.fns.sendEmail(this.contactMe.value).subscribe(result => {
-    //   this.formSubmitted = true;
-    //   this.formResponse = result;
-    // }, (error: FirebaseFunctionsResponse) => {
-    //   this.formSubmitted = true;
-    //   this.formResponse = error;
-    // });
   }
 }

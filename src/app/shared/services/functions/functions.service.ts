@@ -11,6 +11,7 @@ export class FunctionsService {
   constructor(private readonly functions: Functions) { }
 
   sendEmail(): (data?: unknown) => Observable<FirebaseFunctionsResponse> {
+    console.log('FunctionsService => sendEmail: ');
     return httpsCallableData(this.functions, 'sendEmail', { timeout: 3_000 });
   }
 }
