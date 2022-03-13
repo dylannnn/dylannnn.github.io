@@ -1,37 +1,43 @@
 <h2 mat-dialog-title>Contact Me</h2>
 
 <mat-dialog-content class="mat-typography">
-  <form [formGroup]="contactMe" (ngSubmit)="submitForm()" id="contact-me" aria-describedby="contact-help">
-    <p id="contact-help" class="text-gray-500	">(I'll never share your contact info with anyone else.)</p>
-    <div class="flex flex-wrap sm:flex-nowrap sm:space-x-4">
-      <mat-form-field appearance="outline" class="w-full">
-        <mat-label>Name</mat-label>
-        <input matInput formControlName="name" placeholder="Tell me your name.">
-        <mat-error *ngIf="contactName?.invalid">I'd like to know you :)</mat-error>
-      </mat-form-field>
-      <mat-form-field appearance="outline" class="w-full">
-        <mat-label>Phone</mat-label>
-        <input matInput formControlName="phone" placeholder="How can I call you back?">
-      </mat-form-field>
-    </div>
-    <div class="flex">
-      <mat-form-field appearance="outline" class="w-full">
-        <mat-label>Email</mat-label>
-        <input matInput formControlName="email" placeholder="How can I contact with you?">
-        <mat-error *ngIf="contactEmail?.invalid">I'm happy to response to you :)</mat-error>
-      </mat-form-field>
-    </div>
-    <div class="flex">
-      <mat-form-field appearance="outline" class="w-full">
-        <mat-label>Message</mat-label>
-        <textarea matInput formControlName="message" placeholder="Tell me what's your questions."></textarea>
-      </mat-form-field>
-    </div>
-  </form>
-  <!-- Response {{ response$ | async }} -->
+
+  <ng-container *ngIf="formSubmitted">
+    <p>{{ formResponse?.details || formResponse?.status || 'Thank you!'}}</p>
+  </ng-container>
+
+  <ng-container *ngIf="!formSubmitted">
+    <form [formGroup]="contactMe" (ngSubmit)="submitForm()" id="contact-me" aria-describedby="contact-help">
+      <p id="contact-help" class="text-gray-500	">(I'll never share your contact info with anyone else.)</p>
+      <div class="flex flex-wrap sm:flex-nowrap sm:space-x-4">
+        <mat-form-field appearance="outline" class="w-full">
+          <mat-label>Name</mat-label>
+          <input matInput formControlName="name" placeholder="Tell me your name.">
+          <mat-error *ngIf="contactName?.invalid">I'd like to know you :)</mat-error>
+        </mat-form-field>
+        <mat-form-field appearance="outline" class="w-full">
+          <mat-label>Phone</mat-label>
+          <input matInput formControlName="phone" placeholder="How can I call you back?">
+        </mat-form-field>
+      </div>
+      <div class="flex">
+        <mat-form-field appearance="outline" class="w-full">
+          <mat-label>Email</mat-label>
+          <input matInput formControlName="email" placeholder="How can I contact with you?">
+          <mat-error *ngIf="contactEmail?.invalid">I'm happy to response to you :)</mat-error>
+        </mat-form-field>
+      </div>
+      <div class="flex">
+        <mat-form-field appearance="outline" class="w-full">
+          <mat-label>Message</mat-label>
+          <textarea matInput formControlName="message" placeholder="Tell me what's your questions."></textarea>
+        </mat-form-field>
+      </div>
+    </form>
+  </ng-container>
 </mat-dialog-content>
 
 <mat-dialog-actions align="end">
   <button mat-button mat-dialog-close>Close</button>
-  <button mat-flat-button color="primary" [disabled]="!contactMe.valid || sending" (click)="submitForm()">Send</button>
+  <button mat-flat-button color="primary" [disabled]="!contactMe.valid || sending" *ngIf="!formSubmitted" (click)="submitForm()">Send</button>
 </mat-dialog-actions>

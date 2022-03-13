@@ -30,7 +30,7 @@ exports.sendEmail = service.https
     .onCall(async (data: IContactForm, context) => {
       const mailData: MailDataRequired = {
         to: 'dylannnnlee@gmail.com',
-        from: 'info@yunfei.li',
+        from: 'dylannnnlee@gmail.com',
         templateId: 'd-d72ecd2125354d15b5c5f12dc76e79b3',
         dynamicTemplateData: {
           name: data?.name,

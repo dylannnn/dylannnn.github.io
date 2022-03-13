@@ -1,7 +1,8 @@
 import { Component, OnInit } from '@angular/core';
 import { AbstractControl, FormBuilder, FormGroup, Validators } from '@angular/forms';
-import { EMPTY, Observable } from 'rxjs';
-import { FunctionsService } from '../../services/functions/functions.service';
+import { EMPTY, Observable, Subject, takeUntil } from 'rxjs';
+import { FirebaseFunctionsResponse } from 'functions/src/firebase-functions-response';
+import { FunctionsService } from 'src/app/shared/services/functions/functions.service';
 
 @Component({
   selector: 'app-contact-dialog',
@@ -11,8 +12,10 @@ import { FunctionsService } from '../../services/functions/functions.service';
 export class ContactDialogComponent implements OnInit {
   contactMe: FormGroup;
   sending: boolean = false;
-  response$: Observable<any> = EMPTY;
+  formResponse!: FirebaseFunctionsResponse;
   formSubmitted: boolean = false;
+
+  private _unsubscribeAll: Subject<any> = new Subject<any>();
 
   constructor(
     private formBuilder: FormBuilder,
@@ -52,7 +55,23 @@ export class ContactDialogComponent implements OnInit {
     console.log('submitForm');
     this.sending = true;
 
-    this.response$ = this.functionsService.sendEmail()(this.contactMe.value);
+    this.functionsService.sendEmail()(this.contactMe.value).pipe(
+      takeUntil(this._unsubscribeAll)
+    ).subscribe({
+      next: (result) => {
+        console.log('submitForm Success ', result);
+        this.formSubmitted = true;
+        this.formResponse = result;
+        this.sending = false;
+      },
+      error: (e) => {
+        console.log('submitForm Error ', e);
+        this.formSubmitted = true;
+        this.formResponse = e;
+        console.error('Form submit with error');
+        this.sending = false;
+      }
+    });
     // this.fns.sendEmail(this.contactMe.value).subscribe(result => {
     //   this.formSubmitted = true;
     //   this.formResponse = result;
